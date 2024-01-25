@@ -1,0 +1,35 @@
+topomap:
+  - node:
+      id: 1
+      edge: 
+        - id: 1
+          deg: -90
+      type: end
+  - node:
+      id: 2
+      edge:
+        - id: 2
+          deg: 0
+        - id: 1
+          deg: 90
+      type: corner
+  - node:
+      id: 3
+      edge:
+        - id: 2
+          deg: 180
+        - id: 3
+          deg: -90
+      type: corner
+  - node:
+      id: 4
+      edge: 
+        - id: 3
+          deg: 90
+      type: end
+  - edge:
+      id: 1
+  - edge: 
+      id: 2
+  - edge: 
+      id: 3
