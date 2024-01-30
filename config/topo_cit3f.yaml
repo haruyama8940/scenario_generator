@@ -14,7 +14,7 @@ topomap:
           deg: 90
         - id: 15
           deg: 0
-      type: corner
+      type: 3way
   - node:
       id: 3
       edge:
@@ -106,7 +106,7 @@ topomap:
           deg: 180
         - id: 16
           deg: 90
-      type: corner
+      type: 3way
   - node:
       id: 14
       edge: 
