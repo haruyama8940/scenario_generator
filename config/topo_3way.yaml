@@ -20,12 +20,20 @@ topomap:
           deg: 180
         - id: 3
           deg: -90
-      type: corner
+        - id: 4
+          deg: 0
+      type: 3way
   - node:
       id: 4
       edge: 
         - id: 3
           deg: 90
+      type: dead_end
+  - node:
+      id: 5
+      edge: 
+        - id: 4
+          deg: 180
       type: dead_end
   - edge:
       id: 1
@@ -33,3 +41,5 @@ topomap:
       id: 2
   - edge: 
       id: 3
+  - edge:
+      id: 4
