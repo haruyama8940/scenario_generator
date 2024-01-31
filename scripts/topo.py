@@ -4,7 +4,7 @@ import matplotlib.pyplot as plt
 import numpy as np
 
 # YAMLデータを読み込む
-yaml_file_path = '/home/rdclab/orne_ws/src/scenario_generator/config/topo_cit3f.yaml'
+yaml_file_path = '/home/haru/souko/scenario_generator/config/topo_cit3f.yaml'
 with open(yaml_file_path) as yaml_data:
     data = yaml.load(yaml_data, Loader=yaml.FullLoader)
 
@@ -19,7 +19,7 @@ def check_overlapping(pos1,pos2 ,min_dist=0.1):
 # グラフを作成
 G = nx.Graph()
 pos = {}  # ノードの位置を格納する辞書
-edge_length = 2  # すべてのエッジの長さを一定とする
+edge_length = 3  # すべてのエッジの長さを一定とする
 
 # 初期ノードの位置を設定
 pos[1] = (0, 0)  # 最初のノードの位置を原点とする
@@ -60,23 +60,55 @@ for edge_id, nodes in edge_to_nodes.items():
 
 # pos[1] = (0.0)
 pos = {1: (0,0)} # The position of the initial node is the origin.
+# pos_check = ()
 for (node_id,edge_id),deg in  edge_info_dict.items():
-    # print(pos)
+    print(pos)
     if node_id in pos: #nodeの位置を現在のnodeをもとに決定
         rad = np.radians(deg)  # 角度をラジアンに変換
         for other_node_id in edge_to_nodes[edge_id]:
             if node_id != other_node_id and other_node_id not in pos:
-                pos[other_node_id] = (
-                                    round((pos[node_id][0] + edge_length * np.cos(rad)),1 ),
-                                    round((pos[node_id][1] + edge_length * np.sin(rad)),1)
+                pos_check = (round((pos[node_id][0] + edge_length * np.cos(rad)),1 ),
+                            round((pos[node_id][1] + edge_length * np.sin(rad)),1))
+                print(node_id)
+                print(pos_check)
+                if pos_check in pos:
+                    print('どすこい')
+                    pos[other_node_id] = (
+                                    round((pos[node_id][0] + 0.5 * np.cos(rad)),1 ),
+                                    round((pos[node_id][1] + 0.5 * np.sin(rad)),1)
                                     )
-pos2 = dict(sorted(pos.items()))
-print(pos)
-print(pos2)
-pos_id = 1
-# for node_pos_id ,pos_node_id in pos2.items():
+                else:
+                    pos[other_node_id] = pos_check
 
-    
+                # pos[other_node_id] = (
+                #                     round((pos[node_id][0] + edge_length * np.cos(rad)),1 ),
+                #                     round((pos[node_id][1] + edge_length * np.sin(rad)),1)
+                #                     )
+pos2 = dict(sorted(pos.items()))
+# print(pos)
+print('pos2_over:',pos2)
+pos_id = 1
+pos_check = {}
+# for node_pos_id ,pos_node_id in pos2.items():
+#     if pos_node_id in pos_check:
+#         print('pos_node_id:',node_pos_id)
+# seen_positions = {}
+# for node_id, position in pos.items():
+#     if position in seen_positions:
+#         print(f"重複が見つかりました: Node ID {node_id} は Node ID {seen_positions[position]} と同じ座標 {position} を持っています。")
+#         over_node_1 = node_id
+#         over_node_2 = seen_positions[position]
+#         rad = np.radians(-90)
+#         pos2[over_node_1] = (
+#                             round((pos[over_node_1][0] + 0.5 * np.cos(rad)),1),
+#                             round((pos[over_node_1][1] + 0.5 * np.sin(rad)),1)
+#                             # round((pos[over_node_1][1] + 0.5 * np.sin(rad)),1)
+#         )
+#     else:
+#         seen_positions[position] = node_id
+
+
+print(pos2)
 node_colors = [type_color_dict[G.nodes[node]["type"]] for node in G.nodes()]
 # # # グラフを描画
 # nx.draw(G, pos, with_labels=True, node_size=800, edge_color='gray', node_color=node_colors, font_size=12)
