@@ -118,7 +118,31 @@ topomap:
       edge: 
         - id: 17
           deg: 180 
+        - id: 18
+          deg: 0 
+        - id: 19
+          deg: 90 
       type: 3way
+  - node:
+      id: 16
+      edge: 
+        - id: 18
+          deg: 180 
+      type: dead_end
+  - node:
+      id: 17
+      edge: 
+        - id: 19
+          deg: -90 
+        - id: 20
+          deg: 0 
+      type: corner
+  - node:
+      id: 18
+      edge: 
+        - id: 20
+          deg: -90 
+      type: dead_end
 
   - edge:
       id: 1
@@ -154,3 +178,9 @@ topomap:
       id: 16
   - edge: 
       id: 17
+  - edge: 
+      id: 18
+  - edge: 
+      id: 19
+  - edge: 
+      id: 20
